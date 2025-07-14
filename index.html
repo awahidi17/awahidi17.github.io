@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmad Wahidi | Code & Cuisine</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/app.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom right, #fff7e6, #ffe6f0);
+      color: #333;
+    }
+
+    header {
+      background: #ff7043;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .pressStart {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.5rem;
+    }
+
+    #about {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2rem;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    #aboutLeft {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    #bioPic {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    #aboutLeft h1 {
+      color: #d84315;
+      margin-top: 1rem;
+    }
+
+    #aboutRight {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .skillset {
+      margin-bottom: 2rem;
+    }
+
+    .title {
+      font-size: 1.3rem;
+      color: #00897b;
+      margin-bottom: 1rem;
+    }
+
+    .skill {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      background: #fff;
+      border-left: 6px solid #ffca28;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .red {
+      color: #ff5252;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="pressStart">Welcome to Ahmad Wahidi’s World</h1>
+    <p>Where Code Meets Cuisine 🍕💻</p>
+  </header>
+
+  <div id="about">
+    <div id="aboutLeft">
+      <img src="assets/images/bioPic.png" alt="Ahmad Wahidi Bio Picture" id="bioPic">
+      <h1>Meet Ahmad Wahidi</h1>
+      <p>I am a passionate food lover and curious coder who’s blending the art of cooking with the logic of programming. Whether he's optimizing a recipe or a JavaScript function, he’s always looking to create delightful experiences.</p>
+      <p>Through Foodies Depot and other digital projects, I aim to empower food creators and consumers alike — using modern web tools, smart logic, and a little spice!</p>
+      <p>From flavors to functions, I believe in <strong>bold experiments</strong> and <strong>tasty results</strong>.</p>
+    </div>
+
+    <div id="aboutRight">
+      <div class="skillset">
+        <h1 class="title">Coding Ingredients</h1>
+        <div class="skill">
+          <img src="assets/images/javascript.png" alt="JavaScript" class="icon">
+          <div>
+            <h3>JavaScript</h3>
+            <p>Front-end magic for tasty UIs</p>
+          </div>
+        </div>
+        <div class="skill">
+          <img src="assets/images/python.png" alt="Python" class="icon">
+          <div>
+            <h3>Python</h3>
+            <p>Automating menus & systems</p>
+          </div>
+        </div>
+        <div class="skill">
+          <img src="assets/images/html.png" alt="HTML" class="icon">
+          <div>
+            <h3>HTML & CSS</h3>
+            <p>Seasoning the web with structure & style</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skillset">
+        <h1 class="title">Tools in the Kitchen</h1>
+        <div class="skill">
+          <img src="assets/images/vscode.png" alt="VS Code" class="icon">
+          <div>
+            <h3>VS Code</h3>
+            <p>Code chopping board</p>
+          </div>
+        </div>
+        <div class="skill">
+          <img src="assets/images/git.png" alt="GitHub" class="icon">
+          <div>
+            <h3>GitHub</h3>
+            <p>Saving every tasty version</p>
+          </div>
+        </div>
+        <div class="skill">
+          <img src="assets/images/cooking.png" alt="Cooking" class="icon">
+          <div>
+            <h3>Cooking</h3>
+            <p>Inspired by kitchens, powered by code</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 <span class="red">AHMAD WAHIDI</span> – serving code & cuisine daily.
+  </footer>
+
+</body>
+</html>
