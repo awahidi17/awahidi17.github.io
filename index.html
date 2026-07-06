@@ -1,178 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ahmad Wahidi | Code & Cuisine</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmad Wahidi — Mobile Developer</title>
+<meta name="description" content="Ahmad Wahidi — Mobile Developer student at triOS College. iOS, Android, UI/UX, and web.">
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg2:#161b22;
+    --card:#1c2331;
+    --accent:#58a6ff;
+    --accent2:#bc8cff;
+    --accent3:#3fb950;
+    --text:#e6edf3;
+    --muted:#8b949e;
+    --border:#30363d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--text);overflow-x:hidden;
+  }
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/app.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to bottom right, #fff7e6, #ffe6f0);
-      color: #333;
-    }
+  /* ---------- particle canvas ---------- */
+  #particles{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-    header {
-      background: #ff7043;
-      padding: 2rem;
-      text-align: center;
-      color: white;
-    }
+  /* ---------- animated gradient blobs ---------- */
+  .blob{position:fixed;border-radius:50%;filter:blur(110px);opacity:.22;z-index:0;pointer-events:none;
+    animation:drift 18s ease-in-out infinite alternate}
+  .blob.b1{width:420px;height:420px;background:var(--accent);top:-120px;left:-120px}
+  .blob.b2{width:380px;height:380px;background:var(--accent2);top:40%;right:-140px;animation-delay:-6s}
+  .blob.b3{width:300px;height:300px;background:var(--accent3);bottom:-100px;left:30%;animation-delay:-12s}
+  @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,40px) scale(1.15)}}
 
-    .pressStart {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 1.5rem;
-    }
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:10;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 28px;
+    background:rgba(13,17,23,.75);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    animation:slideDown .7s ease;
+  }
+  @keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+  nav .logo{font-family:ui-monospace,Menlo,monospace;font-weight:700;color:var(--accent);text-decoration:none;font-size:1.05rem}
+  nav .menu{display:flex;gap:22px}
+  nav .menu a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .25s}
+  nav .menu a:hover{color:var(--accent)}
+  nav .menu a span{color:var(--accent);font-family:ui-monospace,Menlo,monospace;margin-right:4px}
+  @media(max-width:640px){nav .menu{gap:14px}nav .menu a span{display:none}}
 
-    #about {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 2rem;
-      gap: 2rem;
-      justify-content: center;
-    }
+  main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 24px}
 
-    #aboutLeft {
-      flex: 1;
-      min-width: 300px;
-    }
+  /* ---------- hero ---------- */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:70px}
+  .hero .hello{color:var(--accent3);font-family:ui-monospace,Menlo,monospace;font-size:1rem;
+    opacity:0;animation:fadeUp .8s ease forwards .2s}
+  .hero h1{
+    font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.1;margin:14px 0;
+    background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent),var(--accent2));
+    background-size:300% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shine 6s linear infinite,fadeUp .8s ease forwards .4s;opacity:0;
+  }
+  @keyframes shine{to{background-position:300% 0}}
+  .hero h2{font-size:clamp(1.1rem,3vw,1.6rem);color:var(--muted);font-weight:500;
+    opacity:0;animation:fadeUp .8s ease forwards .6s;min-height:1.6em}
+  .hero h2 .type{color:var(--text);border-right:2px solid var(--accent);padding-right:3px;
+    animation:blink 1s step-end infinite}
+  @keyframes blink{50%{border-color:transparent}}
+  .hero p.tag{margin-top:22px;max-width:580px;color:var(--muted);line-height:1.7;
+    opacity:0;animation:fadeUp .8s ease forwards .8s}
+  .hero .cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease forwards 1s}
+  .btn{
+    padding:12px 26px;border-radius:10px;text-decoration:none;font-weight:600;font-size:.95rem;
+    transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0d1117}
+  .btn.primary:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(88,166,255,.35)}
+  .btn.ghost{border:1px solid var(--accent);color:var(--accent)}
+  .btn.ghost:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(88,166,255,.15)}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;margin-top:28px;
+    background:var(--bg2);border:1px solid var(--border);border-radius:999px;
+    padding:8px 18px;font-size:.9rem;color:var(--accent);width:fit-content;
+    opacity:0;animation:fadeUp .8s ease forwards 1.2s;
+  }
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);
+    animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(63,185,80,.6)}50%{box-shadow:0 0 0 7px rgba(63,185,80,0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  .scroll-hint{margin-top:56px;color:var(--muted);font-size:1.4rem;
+    animation:bounce 2s ease-in-out infinite;width:fit-content;opacity:.7}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
 
-    #bioPic {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+  /* ---------- sections ---------- */
+  section{padding:90px 0}
+  .section-title{font-size:1.8rem;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+  .section-title .num{color:var(--accent);font-family:ui-monospace,Menlo,monospace;font-size:1.2rem}
+  .section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+  .section-sub{color:var(--muted);margin-bottom:40px}
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
 
-    #aboutLeft h1 {
-      color: #d84315;
-      margin-top: 1rem;
-    }
+  /* ---------- skill bars ---------- */
+  .skill{margin-bottom:26px}
+  .skill .row{display:flex;justify-content:space-between;margin-bottom:8px}
+  .skill .name{font-weight:600;display:flex;align-items:center;gap:10px}
+  .skill .icon{font-size:1.2rem}
+  .skill .pct{color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:.9rem}
+  .bar{height:10px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;overflow:hidden}
+  .fill{height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    transition:width 1.4s cubic-bezier(.22,1,.36,1);position:relative}
+  .fill::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+    transform:translateX(-100%);animation:shimmer 2.2s ease-in-out infinite}
+  @keyframes shimmer{60%,100%{transform:translateX(100%)}}
 
-    #aboutRight {
-      flex: 1;
-      min-width: 300px;
-    }
+  /* ---------- cards ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;
+    transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+  }
+  .card:hover{transform:translateY(-8px);border-color:var(--accent);
+    box-shadow:0 12px 30px rgba(88,166,255,.15)}
+  .card .emoji{font-size:2rem;display:inline-block;transition:transform .3s ease}
+  .card:hover .emoji{transform:scale(1.25) rotate(-8deg)}
+  .card h3{margin:14px 0 8px;font-size:1.1rem}
+  .card p{color:var(--muted);font-size:.92rem;line-height:1.6}
 
-    .skillset {
-      margin-bottom: 2rem;
-    }
+  /* ---------- projects ---------- */
+  .proj{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;
+    display:flex;flex-direction:column;
+    transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+  }
+  .proj:hover{transform:translateY(-8px) scale(1.01);border-color:var(--accent2);
+    box-shadow:0 14px 34px rgba(188,140,255,.15)}
+  .proj .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .proj .folder{font-size:2rem}
+  .proj .top a{color:var(--muted);text-decoration:none;font-size:1.2rem;transition:color .25s,transform .25s;display:inline-block}
+  .proj .top a:hover{color:var(--accent);transform:translateY(-3px)}
+  .proj h3{font-size:1.15rem;margin-bottom:10px}
+  .proj p{color:var(--muted);font-size:.92rem;line-height:1.6;flex:1}
+  .proj .tech{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;
+    font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:var(--accent3)}
 
-    .title {
-      font-size: 1.3rem;
-      color: #00897b;
-      margin-bottom: 1rem;
-    }
+  /* ---------- chips ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .chip{background:var(--bg2);border:1px solid var(--border);border-radius:999px;
+    padding:7px 16px;font-size:.85rem;color:var(--text);
+    transition:transform .25s ease,border-color .25s ease,color .25s ease}
+  .chip:hover{transform:scale(1.08);border-color:var(--accent2);color:var(--accent2)}
 
-    .skill {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      background: #fff;
-      border-left: 6px solid #ffca28;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
+  /* ---------- github stats ---------- */
+  .stats{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+  .stats img{max-width:100%;border-radius:12px;border:1px solid var(--border)}
 
-    .icon {
-      width: 40px;
-      height: 40px;
-    }
+  /* ---------- education ---------- */
+  .edu{background:linear-gradient(135deg,rgba(88,166,255,.08),rgba(188,140,255,.08));
+    border:1px solid var(--border);border-radius:16px;padding:34px;
+    display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap}
+  .edu .cap{font-size:2.6rem;animation:float 4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .edu h3{font-size:1.25rem;margin-bottom:6px}
+  .edu p{color:var(--muted);line-height:1.7;max-width:640px}
+  .edu .prog{color:var(--accent);font-weight:600}
 
-    footer {
-      background: #333;
-      color: #fff;
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
+  /* ---------- contact / footer ---------- */
+  #contact{text-align:center}
+  #contact p{color:var(--muted);max-width:520px;margin:0 auto 30px;line-height:1.7}
+  footer{border-top:1px solid var(--border);padding:36px 0;text-align:center;color:var(--muted);font-size:.9rem}
+  footer a{color:var(--accent);text-decoration:none}
+  .links{display:flex;justify-content:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+  .links a{border:1px solid var(--border);border-radius:10px;padding:10px 20px;color:var(--text);
+    text-decoration:none;transition:transform .25s ease,border-color .25s ease,color .25s ease}
+  .links a:hover{transform:translateY(-4px);border-color:var(--accent);color:var(--accent)}
 
-    .red {
-      color: #ff5252;
-      font-weight: bold;
-    }
-  </style>
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
+</style>
 </head>
 <body>
+<canvas id="particles"></canvas>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 
-  <header>
-    <h1 class="pressStart">Welcome to Ahmad Wahidi’s World</h1>
-    <p>Where Code Meets Cuisine 🍕💻</p>
-  </header>
-
-  <div id="about">
-    <div id="aboutLeft">
-      <img src="assets/images/cazanova.jpg"Ahmad Wahidi Bio Picture" id="bioPic">
-      <h1>Meet Ahmad Wahidi</h1>
-      <p>I am a passionate food lover and curious coder who’s blending the art of easing food distribution with the logic of programming. Whether optimizing a recipe or a vscode, I always look to create delightful experiences.</p>
-      <p>Through Foodies Depot and other digital projects, I aim to empower food creators and consumers alike by using modern web tools, smart logic, and a little spice!</p>
-      <p>From flavors to functions, I believe in <strong>bold experiments</strong> and <strong>tasty results</strong>.</p>
-    </div>
-
-    <div id="aboutRight">
-      <div class="skillset">
-        <h1 class="title">Coding Ingredients</h1>
-        <div class="skill">
-          <img src="assets/images/javascript.png" alt="JavaScript" class="icon">
-          <div>
-            <h3>JavaScript</h3>
-            <p>Front-end magic for tasty UIs</p>
-          </div>
-        </div>
-        <div class="skill">
-          <img src="assets/images/python-file.png"Python" class="icon">
-          <div>
-            <h3>Python</h3>
-            <p>Automating menus & systems</p>
-          </div>
-        </div>
-        <div class="skill">
-          <img src="assets/images/html.png" alt="HTML" class="icon">
-          <div>
-            <h3>HTML & CSS</h3>
-            <p>Seasoning the web with structure & style</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="skillset">
-        <h1 class="title">Tools in the Kitchen</h1>
-        <div class="skill">
-          <img src="assets/images/vscode.png"VS Code" class="icon">
-          <div>
-            <h3>VS Code</h3>
-            <p>Code chopping board</p>
-          </div>
-        </div>
-        <div class="skill">
-          <img src="assets/images/github.png"GitHub" class="icon">
-          <div>
-            <h3>GitHub</h3>
-            <p>Saving every tasty version</p>
-          </div>
-        </div>
-        <div class="skill">
-          <img src="assets/images/cooking.png" alt="Cooking" class="icon">
-          <div>
-            <h3>Cooking</h3>
-            <p>Inspired by code, powered by Kitchens</p>
-          </div>
-        </div>
-      </div>
-    </div>
+<nav>
+  <a class="logo" href="#">&lt;aw /&gt;</a>
+  <div class="menu">
+    <a href="#skills"><span>01.</span>Skills</a>
+    <a href="#mobile"><span>02.</span>Mobile</a>
+    <a href="#projects"><span>03.</span>Projects</a>
+    <a href="#github"><span>04.</span>GitHub</a>
+    <a href="#contact"><span>05.</span>Contact</a>
   </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hello">Hi, my name is</span>
+    <h1>Ahmad Wahidi.</h1>
+    <h2>I build things for <span class="type" id="typed"></span></h2>
+    <p class="tag">
+      Mobile Developer student at <strong>triOS College</strong>, focused on crafting
+      clean interfaces and connected apps — from wireframe in Adobe XD to a working
+      build in Xcode.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">View My Work</a>
+      <a class="btn ghost" href="mailto:ahmad.wahidi@outlook.com">Get In Touch</a>
+    </div>
+    <span class="badge"><span class="dot"></span> Open to internships &amp; junior roles</span>
+    <div class="scroll-hint">▼</div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2 class="section-title reveal"><span class="num">01.</span>💻 Core Skills</h2>
+    <p class="section-sub reveal">The tools I use every day</p>
+
+    <div class="skill reveal">
+      <div class="row"><span class="name"><span class="icon">🌐</span>HTML</span><span class="pct" data-target="90">0%</span></div>
+      <div class="bar"><div class="fill" data-width="90"></div></div>
+    </div>
+    <div class="skill reveal">
+      <div class="row"><span class="name"><span class="icon">🎨</span>CSS</span><span class="pct" data-target="85">0%</span></div>
+      <div class="bar"><div class="fill" data-width="85"></div></div>
+    </div>
+    <div class="skill reveal">
+      <div class="row"><span class="name"><span class="icon">🔌</span>APIs &amp; REST</span><span class="pct" data-target="80">0%</span></div>
+      <div class="bar"><div class="fill" data-width="80"></div></div>
+    </div>
+    <div class="skill reveal">
+      <div class="row"><span class="name"><span class="icon">📱</span>Xcode &amp; Swift</span><span class="pct" data-target="75">0%</span></div>
+      <div class="bar"><div class="fill" data-width="75"></div></div>
+    </div>
+    <div class="skill reveal">
+      <div class="row"><span class="name"><span class="icon">✏️</span>Adobe XD</span><span class="pct" data-target="85">0%</span></div>
+      <div class="bar"><div class="fill" data-width="85"></div></div>
+    </div>
+  </section>
+
+  <!-- MOBILE DEV -->
+  <section id="mobile">
+    <h2 class="section-title reveal"><span class="num">02.</span>📲 Mobile Development</h2>
+    <p class="section-sub reveal">What I'm building in the triOS Mobile Developer program</p>
+
+    <div class="grid">
+      <div class="card reveal">
+        <span class="emoji">🍎</span>
+        <h3>iOS Development</h3>
+        <p>Native apps with Swift and Xcode — layouts, navigation, and working with the iOS SDK and simulator.</p>
+      </div>
+      <div class="card reveal">
+        <span class="emoji">🤖</span>
+        <h3>Android Development</h3>
+        <p>Building Android apps with Kotlin and Android Studio, from activities and layouts to publishing basics.</p>
+      </div>
+      <div class="card reveal">
+        <span class="emoji">🎯</span>
+        <h3>UI / UX Design</h3>
+        <p>Prototyping and wireframing in Adobe XD — user flows, mockups, and design systems before a line of code.</p>
+      </div>
+      <div class="card reveal">
+        <span class="emoji">🔗</span>
+        <h3>APIs &amp; Data</h3>
+        <p>Connecting apps to REST APIs, handling JSON, and integrating databases to make apps come alive.</p>
+      </div>
+      <div class="card reveal">
+        <span class="emoji">🌍</span>
+        <h3>Web Foundations</h3>
+        <p>Responsive pages with HTML, CSS, and JavaScript — the base for hybrid and cross-platform apps.</p>
+      </div>
+      <div class="card reveal">
+        <span class="emoji">🛠️</span>
+        <h3>Dev Workflow</h3>
+        <p>Version control with Git &amp; GitHub, debugging, testing, and shipping through the full app lifecycle.</p>
+      </div>
+    </div>
+
+    <div class="chips reveal">
+      <span class="chip">Swift</span><span class="chip">Kotlin</span><span class="chip">Xcode</span>
+      <span class="chip">Android Studio</span><span class="chip">Adobe XD</span><span class="chip">HTML5</span>
+      <span class="chip">CSS3</span><span class="chip">JavaScript</span><span class="chip">REST APIs</span>
+      <span class="chip">JSON</span><span class="chip">Git</span><span class="chip">SQL</span>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2 class="section-title reveal"><span class="num">03.</span>🚀 Projects</h2>
+    <p class="section-sub reveal">Some things I've built — more on the way</p>
+
+    <div class="grid">
+      <div class="proj reveal">
+        <div class="top"><span class="folder">📁</span>
+          <a href="https://github.com/awahidi17" target="_blank" title="View on GitHub">↗</a></div>
+        <h3>Portfolio Website</h3>
+        <p>This site — a hand-coded, animated portfolio built with pure HTML, CSS, and JavaScript. No frameworks, no libraries.</p>
+        <div class="tech"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="top"><span class="folder">📁</span>
+          <a href="https://github.com/awahidi17" target="_blank" title="View on GitHub">↗</a></div>
+        <h3>iOS App — Coming Soon</h3>
+        <p>A native iOS app in progress at triOS — designed in Adobe XD, built in Xcode with Swift, powered by a REST API.</p>
+        <div class="tech"><span>Swift</span><span>Xcode</span><span>REST API</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="top"><span class="folder">📁</span>
+          <a href="https://github.com/awahidi17" target="_blank" title="View on GitHub">↗</a></div>
+        <h3>Android App — Coming Soon</h3>
+        <p>An Android companion app exploring Kotlin, Android Studio, and material design principles.</p>
+        <div class="tech"><span>Kotlin</span><span>Android Studio</span><span>JSON</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GITHUB STATS -->
+  <section id="github">
+    <h2 class="section-title reveal"><span class="num">04.</span>📊 GitHub</h2>
+    <p class="section-sub reveal">My activity at a glance — updates automatically</p>
+    <div class="stats reveal">
+      <img src="https://github-readme-stats.vercel.app/api?username=awahidi17&show_icons=true&theme=github_dark&hide_border=true&bg_color=1c2331" alt="GitHub stats for awahidi17">
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=awahidi17&layout=compact&theme=github_dark&hide_border=true&bg_color=1c2331" alt="Top languages for awahidi17">
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2 class="section-title reveal">🎓 Education</h2>
+    <div class="edu reveal">
+      <div class="cap">🎓</div>
+      <div>
+        <h3>triOS College</h3>
+        <p><span class="prog">Mobile Developer Program</span><br>
+        Hands-on training in iOS and Android development, UI/UX design, web technologies,
+        and API integration — building real apps from concept to deployment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="section-title reveal"><span class="num">05.</span>📬 Get In Touch</h2>
+    <p class="reveal">I'm currently looking for internship and junior mobile developer opportunities.
+    My inbox is always open — whether it's a role, a project, or just to say hi.</p>
+    <a class="btn primary reveal" href="mailto:ahmad.wahidi@outlook.com" style="display:inline-block">Say Hello 👋</a>
+  </section>
 
   <footer>
-    &copy; 2025 <span class="red">AHMAD WAHIDI (cazanova)</span> – serving code & cuisine daily.
+    <div class="links">
+      <a href="https://github.com/awahidi17" target="_blank">GitHub</a>
+      <a href="mailto:ahmad.wahidi@outlook.com">Email</a>
+      <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a>
+    </div>
+    <p>Designed &amp; built by <a href="https://github.com/awahidi17" target="_blank">Ahmad Wahidi</a> · © 2026</p>
   </footer>
+</main>
 
+<script>
+  // ---------- typing effect ----------
+  const words = ["iPhone. 🍎", "Android. 🤖", "the web. 🌐", "people. ✨"];
+  const el = document.getElementById("typed");
+  let w = 0, c = 0, deleting = false;
+  (function type(){
+    const word = words[w];
+    el.textContent = word.slice(0, c);
+    if (!deleting && c < word.length){ c++; setTimeout(type, 90); }
+    else if (!deleting){ deleting = true; setTimeout(type, 1600); }
+    else if (c > 0){ c--; setTimeout(type, 45); }
+    else { deleting = false; w = (w+1) % words.length; setTimeout(type, 350); }
+  })();
+
+  // ---------- scroll reveal + skill bars ----------
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("visible");
+      const fill = e.target.querySelector(".fill");
+      if (fill) {
+        fill.style.width = fill.dataset.width + "%";
+        const pct = e.target.querySelector(".pct");
+        const target = +pct.dataset.target;
+        let n = 0;
+        const t = setInterval(() => {
+          n += 2;
+          if (n >= target){ n = target; clearInterval(t); }
+          pct.textContent = n + "%";
+        }, 24);
+      }
+      io.unobserve(e.target);
+    });
+  }, { threshold: .2 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // ---------- particle network ----------
+  const canvas = document.getElementById("particles");
+  const ctx = canvas.getContext("2d");
+  let W, H, pts = [];
+  function resize(){
+    W = canvas.width = innerWidth;
+    H = canvas.height = innerHeight;
+    const count = Math.min(70, Math.floor(W / 18));
+    pts = Array.from({length: count}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*.4, vy: (Math.random()-.5)*.4
+    }));
+  }
+  resize();
+  addEventListener("resize", resize);
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  (function draw(){
+    ctx.clearRect(0,0,W,H);
+    for (const p of pts){
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.6, 0, Math.PI*2);
+      ctx.fillStyle = "rgba(88,166,255,.5)";
+      ctx.fill();
+    }
+    for (let i = 0; i < pts.length; i++)
+      for (let j = i+1; j < pts.length; j++){
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d = dx*dx + dy*dy;
+        if (d < 14400){
+          ctx.strokeStyle = `rgba(88,166,255,${.18*(1 - d/14400)})`;
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.stroke();
+        }
+      }
+    if (!reduced) requestAnimationFrame(draw);
+  })();
+</script>
 </body>
 </html>
